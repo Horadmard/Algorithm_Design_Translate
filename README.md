@@ -1,1 +1,1 @@
-# This is a project for translating a part of a book
+# This is a project for translating a part of a book using $Latex$
