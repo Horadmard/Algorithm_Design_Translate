@@ -6,6 +6,8 @@
 
 \documentclass{book} % use larger type; default would be 10pt
 \usepackage{tikz}
+\usepackage{graphicx}
+\graphicspath{ {./figures/} }
 \usepackage{xepersian} 
 
 \settextfont{Yas}
@@ -49,24 +51,26 @@
 
 از نمودار (b) در شکل 7.8 صفحه‌ی 363، میتوانیم نتیجه بگیریم که لیست ⟨a, b, c, d, e, f, g, h⟩ با پیمایش سطری با شروع از راس a مطابقت دارد. و همین مطلب برای لیست ⟨a, c, b, d, e, h, f, g⟩ نیز صدق میکند.
 
-\begin{latin}
+% \begin{latin}
     
-    \begin{tikzpicture}
-        [scale=.8,auto=left,every node/.style={circle,fill=blue!20}]
-        \node (n1) at (1,1) {a};
-        \node (n2) at (4,8)  {b};
-        \node (n3) at (8,9)  {c};
-        \node (n4) at (11,8) {d};
-        \node (n5) at (9,6)  {e};
-        \node (n6) at (5,5)  {f};
-        \node (n7) at (5,10)  {g};
+%     \begin{tikzpicture}
+%         [scale=.8,auto=left,every node/.style={circle,fill=blue!20}]
+%         \node (n1) at (1,1) {a};
+%         \node (n2) at (4,8)  {b};
+%         \node (n3) at (8,9)  {c};
+%         \node (n4) at (11,8) {d};
+%         \node (n5) at (9,6)  {e};
+%         \node (n6) at (5,5)  {f};
+%         \node (n7) at (5,10)  {g};
   
-    \foreach \from/\to in {n6/n4,n4/n5,n5/n1,n1/n2,n2/n5,n2/n3,n3/n4}
-    \draw (\from) -- (\to);
+%     \foreach \from/\to in {n6/n4,n4/n5,n5/n1,n1/n2,n2/n5,n2/n3,n3/n4}
+%     \draw (\from) -- (\to);
   
-\end{tikzpicture}
+% \end{tikzpicture}
 
-\end{latin}
+% \end{latin}
+
+\includegraphics{f1.pdf}
 
 تصویر 7.8 - یک مثال از گراف. تصویر (a) گرافی را نمایش میدهد که مثالی از حالت مسئله را نشان میدهد.  تصویر (b) کوتاه‌ترین مسیر راس a را تا هر راس گراف با خطوط پررنگ نشان میدهد. در تصویر (b)، عددی که در هر راس مشخص است در واقع فاصله‌ی آن راس تا راس a است.
 
