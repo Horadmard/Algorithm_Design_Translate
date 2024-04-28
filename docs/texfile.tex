@@ -153,6 +153,39 @@
 
 شکل 7.9 - مراحل مختلف کاوش اولویت-عرضی در گراف اسکیما (الف) در شکل 7.8 (صفحه 363). رئوس با دایره توپر، رئوس CLOSE هستند، آنهایی که با دو دایره مشخص شده اند، رئوس OPEN هستند. مقدار صحیح که هر راس را همراهی می کند، فاصله شناخته شده از راس a است. دو صف OPEN و CLOSE به ترتیب در شمال شرقی و جنوب گراف ها نشان داده شده اند.
 
+\begin{latin}
+    
+    \begin{enumerate}
+        
+        \item / coloring all the vertices in grey: /
+        \item for w ∈ N do
+        \item   ColorGr(G, w, grey)
+        \item end for;
+        \item InitFifo(CLOSE); InitFifo(OPEN);
+        \item s ← . . . ; / choice of the initial vertex: /
+        \item ColorGr(G, s, white);
+        \item AddFifo(OPEN, s);
+        \item while not IsEmptyFifo(OPEN) do
+        \item   cv ← HeadFifo(OPEN); RemoveFifo(OPEN);
+        \item   AddFifo(CLOSE, cv);
+        \item   OpenNeighborsGr(G, cv) ;
+        \item   while not EndListNeighborsGr(G, cv) do
+        \item   ReadNeighborsGr(G, cv, neighb) ;
+        \item   if WhichColorGr(G, neighb) = grey then
+        \item       ColorGr(G, neighb, white) ;
+        \item       AddFifo(OPEN, neighb)
+        \item   end if
+        \item end while
+        \item end while;
+        \item write(CLOSE) 
+        \item end
+        
+        
+    \end{enumerate}
+    
 
+    سوال ۱: پیچیدگی مجانبی این الگوریتم از نظر شرایط ارزیابی شده چیست؟
+
+\end{latin}
 
 \end{document}
