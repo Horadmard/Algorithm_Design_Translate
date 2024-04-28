@@ -7,6 +7,8 @@
 You can help me with your knowledge in vocabulary and make the translation better (:
 for start just run commands below:
 
-$ git clone https://github.com/Horadmard/Algorithm_Design_Translate
-$ cd Algorithm_Design_Translate
+```
+$ git clone https://github.com/Horadmard/Algorithm_Design_Translate.git
+$ cd Algorithm_Design_Translate/
 $ code .
+```
