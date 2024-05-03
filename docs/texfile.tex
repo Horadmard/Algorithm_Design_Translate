@@ -5,14 +5,20 @@
 % with the fontspec package to easily select fonts.
 
 \documentclass{book} % use larger type; default would be 10pt
-\usepackage{tikz}
-\usepackage{graphicx}
-% \graphicspath{ {./figures/} }
-\usepackage{xepersian} 
+
+\usepackage{pdfpages}
+\usepackage{tcolorbox}
+\usepackage[margin=1in]{geometry}
+\usepackage{xepersian}
 
 \settextfont{Yas}
 \setlatintextfont{Bitstream Charter}
 \setdigitfont{Yas}
+
+
+\renewcommand{\labelitemi}{$\bullet$} % fix persian items
+
+\newcommand{\imgcaption}[1]{\color[HTML]{4F4D4D}\footnotesize{#1}}
 
 \linespread{1.5}
 
@@ -76,7 +82,8 @@ ${(G = N, V)}$
 
 \begin{center}
     \includegraphics{./f1.pdf}
-    % \imgcaption{جدول ۱۲.۱۲: یک آرایه پیشوند-پسوندی از تمام پورین های ۴ حرف}
+
+    \imgcaption{جدول ۱۲.۱۲: یک آرایه پیشوند-پسوندی از تمام پورین های ۴ حرف}
 \end{center}
 
 تصویر 7.8 - یک مثال از گراف. تصویر (a) گرافی را نمایش میدهد که مثالی از حالت مسئله را نشان میدهد.  تصویر (b) کوتاه‌ترین مسیر راس a را تا هر راس گراف با خطوط پررنگ نشان میدهد. در تصویر (b)، عددی که در هر راس مشخص است در واقع فاصله‌ی آن راس تا راس a است.
