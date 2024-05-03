@@ -9,6 +9,8 @@
 \usepackage{pdfpages}
 \usepackage{tcolorbox}
 \usepackage[margin=1in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 \usepackage{xepersian}
 
 \settextfont{Yas}
@@ -81,9 +83,9 @@ ${(G = N, V)}$
 % \includegraphics{f1.pdf}
 
 \begin{center}
-    \includegraphics{./f1.pdf}
+    \includegraphics{./fig7.8.pdf}
 
-    \imgcaption{جدول ۱۲.۱۲: یک آرایه پیشوند-پسوندی از تمام پورین های ۴ حرف}
+    % \imgcaption{جدول ۱۲.۱۲: یک آرایه پیشوند-پسوندی از تمام پورین های ۴ حرف}
 \end{center}
 
 تصویر 7.8 - یک مثال از گراف. تصویر (a) گرافی را نمایش میدهد که مثالی از حالت مسئله را نشان میدهد.  تصویر (b) کوتاه‌ترین مسیر راس a را تا هر راس گراف با خطوط پررنگ نشان میدهد. در تصویر (b)، عددی که در هر راس مشخص است در واقع فاصله‌ی آن راس تا راس a است.
@@ -198,6 +200,26 @@ ${(G = N, V)}$
     
 \end{latin}
 
+\begin{latin}
+    
+    \begin{algorithm}
+        \caption{Text of the caption}\label{your_label}
+        \begin{algorithmic}
+            \STATE  $\mathrm{train\_ANN} (f_i,w_i,o_j)$
+            \FOR{epochs = $1$ to $N$}
+            \WHILE{$(j\le m)$}
+                \STATE Randomly initialize $w_i=\{w_1,w_2,\dots,w_n\}$
+                \STATE input $o_j=\{o_1,o_2,\dots,o_m\}$ in the input layer
+                \STATE forward propagate $(f_i\cdot w_i)$ through layers until getting the predicted result $y$
+                \STATE compute $e=y-y^2$
+                \STATE back propagate $e$ from right to left through layers
+                \STATE update $w_i$
+                \ENDWHILE
+                \ENDFOR
+            \end{algorithmic}
+        \end{algorithm}
+        
+\end{latin}
 سوال ۱: پیچیدگی مجانبی این الگوریتم از نظر شرایط ارزیابی شده چیست؟
 
 سوال ۲: بر اساس این الگوریتم، اصل الگوریتم رنگ آمیزی حریصانه را توضیح دهید.
