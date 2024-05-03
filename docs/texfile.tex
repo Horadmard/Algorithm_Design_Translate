@@ -61,26 +61,6 @@ ${(G = N, V)}$
 
 از نمودار (b) در شکل 7.8 صفحه‌ی 363، میتوانیم نتیجه بگیریم که لیست $⟨a, b, c, d, e, f, g, h⟩$ با پیمایش سطری با شروع از راس a مطابقت دارد. و همین مطلب برای لیست $⟨a, c, b, d, e, h, f, g⟩$ نیز صدق میکند.
 
-% \begin{latin}
-    
-%     \begin{tikzpicture}
-%         [scale=.8,auto=left,every node/.style={circle,fill=blue!20}]
-%         \node (n1) at (1,1) {a};
-%         \node (n2) at (4,8)  {b};
-%         \node (n3) at (8,9)  {c};
-%         \node (n4) at (11,8) {d};
-%         \node (n5) at (9,6)  {e};
-%         \node (n6) at (5,5)  {f};
-%         \node (n7) at (5,10)  {g};
-  
-%     \foreach \from/\to in {n6/n4,n4/n5,n5/n1,n1/n2,n2/n5,n2/n3,n3/n4}
-%     \draw (\from) -- (\to);
-  
-% \end{tikzpicture}
-
-% \end{latin}
-
-% \includegraphics{f1.pdf}
 
 \begin{center}
     \includegraphics{./fig7.8.pdf}
@@ -153,7 +133,7 @@ ${(G = N, V)}$
     
     \begin{enumerate}
         
-        \item constants
+        \item 
         \item n ∈ N1 and n = . . . and N = 1 .. n and Colors = {grey, white} and
         \item V ∈ N × N and V = {. . .}
         \item variables
@@ -166,60 +146,95 @@ ${(G = N, V)}$
     
 \end{latin}
 
+\begin{latin}
+    
+    \begin{algorithm}
+        % \caption{}\label{your_label}
+        \begin{algorithmic}
+            \STATE $constants$
+            % \Constants
+            %     \State $A$, Global var1
+            %     \State $B$, global var2
+            %     \State $C$, global var3
+            % \EndConstants
+
+            % \Variables{}
+            %     \State $A$, Global var1
+            %     \State $B$, global var2
+            %     \State $C$, global var3
+            % \EndVariables
+
+            % \Procedure{Proc}{$input$}
+            %     \State $D$, local var
+            %     \State $A \gets B +D$
+            % \EndProcedure
+
+            \FOR{$w \in N$}
+                \STATE $ColorGr(G, w, grey)$
+            \ENDFOR
+            \STATE $InitFifo(CLOSE); InitFifo(OPEN);$
+            \STATE $s \leftarrow$ . . . ; // choice of the initial vertex:
+            \STATE $ColorGr(G, s, white);$
+            \STATE $AddFifo(OPEN, s);$
+            \WHILE{not $IsEmptyFifo(OPEN)$}
+                \STATE $cv \leftarrow HeadFifo(OPEN); RemoveFifo(OPEN);$
+                \STATE $AddFifo(CLOSE, cv);$
+                \STATE $OpenNeighborsGr(G, cv);$
+                \WHILE{not $EndListNeighborsGr(G, cv)$}
+                    \STATE $ReadNeighborsGr(G, cv, neighb);$
+                    \IF{$WhichColorGr(G, neighb) = grey$}
+                        \STATE $ColorGr(G, neighb, white);$
+                        \STATE $AddFifo(OPEN, neighb);$
+                    \ENDIF
+                \ENDWHILE
+            \ENDWHILE
+            \STATE $write(CLOSE);$
+            \STATE $END$
+        \end{algorithmic}
+    \end{algorithm}
+        
+\end{latin}
+
+\begin{center}
+    \includegraphics{./fig7.9.pdf}
+
+    % \imgcaption{جدول ۱۲.۱۲: یک آرایه پیشوند-پسوندی از تمام پورین های ۴ حرف}
+\end{center}
+
 شکل 7.9 - مراحل مختلف کاوش اولویت-عرضی در گراف اسکیما (الف) در شکل 7.8 (صفحه 363). رئوس با دایره توپر، رئوس CLOSE هستند، آنهایی که با دو دایره مشخص شده اند، رئوس OPEN هستند. مقدار صحیح که هر راس را همراهی می کند، فاصله شناخته شده از راس a است. دو صف OPEN و CLOSE به ترتیب در شمال شرقی و جنوب گراف ها نشان داده شده اند.
 
 \begin{latin}
     
-    \begin{enumerate}
+    \begin{algorithm}
+        \caption{}\label{your_label}
+        \begin{algorithmic}
+            \STATE //coloring all the vertices in grey:
+            \FOR{$w \in N$}
+                \STATE $ColorGr(G, w, grey)$
+            \ENDFOR
+            \STATE $InitFifo(CLOSE); InitFifo(OPEN);$
+            \STATE $s \leftarrow$ . . . ; // choice of the initial vertex:
+            \STATE $ColorGr(G, s, white);$
+            \STATE $AddFifo(OPEN, s);$
+            \WHILE{not $IsEmptyFifo(OPEN)$}
+                \STATE $cv \leftarrow HeadFifo(OPEN); RemoveFifo(OPEN);$
+                \STATE $AddFifo(CLOSE, cv);$
+                \STATE $OpenNeighborsGr(G, cv);$
+                \WHILE{not $EndListNeighborsGr(G, cv)$}
+                    \STATE $ReadNeighborsGr(G, cv, neighb);$
+                    \IF{$WhichColorGr(G, neighb) = grey$}
+                        \STATE $ColorGr(G, neighb, white);$
+                        \STATE $AddFifo(OPEN, neighb);$
+                    \ENDIF
+                \ENDWHILE
+            \ENDWHILE
+            \STATE $write(CLOSE);$
+            \STATE $END$
+        \end{algorithmic}
+    \end{algorithm}
         
-        \item / coloring all the vertices in grey: /
-        \item for w ∈ N do
-        \item   ColorGr(G, w, grey)
-        \item end for;
-        \item InitFifo(CLOSE); InitFifo(OPEN);
-        \item s ← . . . ; / choice of the initial vertex: /
-        \item ColorGr(G, s, white);
-        \item AddFifo(OPEN, s);
-        \item while not IsEmptyFifo(OPEN) do
-        \item   cv ← HeadFifo(OPEN); RemoveFifo(OPEN);
-        \item   AddFifo(CLOSE, cv);
-        \item   OpenNeighborsGr(G, cv) ;
-        \item   while not EndListNeighborsGr(G, cv) do
-        \item   ReadNeighborsGr(G, cv, neighb) ;
-        \item   if WhichColorGr(G, neighb) = grey then
-        \item       ColorGr(G, neighb, white) ;
-        \item       AddFifo(OPEN, neighb)
-        \item   end if
-        \item end while
-        \item end while;
-        \item write(CLOSE) 
-        \item end
-        
-        
-    \end{enumerate}
-    
 \end{latin}
 
-\begin{latin}
-    
-    \begin{algorithm}
-        \caption{Text of the caption}\label{your_label}
-        \begin{algorithmic}
-            \STATE  $\mathrm{train\_ANN} (f_i,w_i,o_j)$
-            \FOR{epochs = $1$ to $N$}
-            \WHILE{$(j\le m)$}
-                \STATE Randomly initialize $w_i=\{w_1,w_2,\dots,w_n\}$
-                \STATE input $o_j=\{o_1,o_2,\dots,o_m\}$ in the input layer
-                \STATE forward propagate $(f_i\cdot w_i)$ through layers until getting the predicted result $y$
-                \STATE compute $e=y-y^2$
-                \STATE back propagate $e$ from right to left through layers
-                \STATE update $w_i$
-                \ENDWHILE
-                \ENDFOR
-            \end{algorithmic}
-        \end{algorithm}
-        
-\end{latin}
 سوال ۱: پیچیدگی مجانبی این الگوریتم از نظر شرایط ارزیابی شده چیست؟
 
 سوال ۲: بر اساس این الگوریتم، اصل الگوریتم رنگ آمیزی حریصانه را توضیح دهید.
