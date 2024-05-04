@@ -8,6 +8,7 @@
 
 \usepackage{pdfpages}
 \usepackage{tcolorbox}
+\usepackage{tabularx}
 \usepackage[margin=1in]{geometry}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -271,8 +272,8 @@ ${(G = N, V)}$
 
 برای حل این مسئله، ابتدا باید مسئله ۲، صفحه ۳۳ را مطالعه کرد.
 فرض کنید $(E, \prec)$ یک زوج مرتب باشد به گونه‌ای که E یک مجموعه متناهی با n عضو
-و ≺ یک رابطه ترتیب جزئی روی E باشد. ما می‌خواهیم روی E یک رابطه ترتیب کلی
-⩽ سازگار با ≺ بنا کنیم، به این معنی که برای هر زوج $(a, b)$ از $E: (a \prec b) ⇒ (a ⩽ b)$.
+و $\prec$ یک رابطه ترتیب جزئی روی E باشد. ما می‌خواهیم روی E یک رابطه ترتیب کلی
+⩽ سازگار با $\prec$ بنا کنیم، به این معنی که برای هر زوج $(a, b)$ از $E: (a \prec b) \rightarrow (a ⩽ b)$.
 به هر عضو از $(E, \prec)$ که هیچ پیش‌تر نداشته باشد، عضو مینیمال گفته می‌شود.
 
 
@@ -282,13 +283,28 @@ ${(G = N, V)}$
 حال دوره‌های زیر را در نظر بگیرید:
 
 
-\begin{table}[]
-    \begin{tabular}{lllll}
-    a & منطق مرتبه اول  & b & مشخصات و برنامه نویسی ضروری &  \\
-    c & نظریه مجموعه    & d & طراحی سیستم های اطلاعاتی    &  \\
-    e & پایگاه های داده & f & داده ساختارها               &  \\
-    \end{tabular}
-\end{table}
+% \begin{table}[]
+%     \begin{tabular}{lllll}
+%     a & منطق مرتبه اول  & b & مشخصات و برنامه نویسی ضروری & \\
+%     c & نظریه مجموعه    & d & طراحی سیستم های اطلاعاتی    & \\
+%     e & پایگاه های داده & f & داده ساختارها               & \\
+%     \end{tabular}
+% \end{table}
+
+\begin{tabularx}{0.8\textwidth} { 
+    | >{\arraybackslash\arraybackslash}X 
+    | >{\centering\arraybackslash}X 
+    | >{\raggedleft\arraybackslash}X 
+    | >{\raggedleft\arraybackslash}X
+    | >{\raggedleft\arraybackslash}X |}
+   \hline
+   a & منطق مرتبه اول & b & مشخصات و برنامه نویسی ضروری \\
+   \hline
+   c & نظریه مجموعه & d &  طراحی سیستم های اطلاعاتی \\
+  \hline
+   e & پایگاه های داده & f & داده ساختارها \\
+  \hline
+\end{tabularx}
 
 
 مثالی از رابطه $\prec$ به صورت زیر تعریف می‌شود:
