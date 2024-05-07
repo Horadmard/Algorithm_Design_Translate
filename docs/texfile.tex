@@ -143,44 +143,6 @@ ${(G = N, V)}$
             \STATE R $\in$ N → Colors and G = (N, V, R) and
             \STATE s $\in$ N an d cv $\in$ N and neighb $\in$ N and CLOSE $\in$ FIFO(N) and OPEN $\in$ FIFO(N)
             \STATE $begin$
-            % \Constants
-            %     \State $A$, Global var1
-            %     \State $B$, global var2
-            %     \State $C$, global var3
-            % \EndConstants
-
-            % \Variables{}
-            %     \State $A$, Global var1
-            %     \State $B$, global var2
-            %     \State $C$, global var3
-            % \EndVariables
-
-            % \Procedure{Proc}{$input$}
-            %     \State $D$, local var
-            %     \State $A \gets B +D$
-            % \EndProcedure
-
-            % \FOR{$w \in N$}
-            %     \STATE $ColorGr(G, w, grey)$
-            % \ENDFOR
-            % \STATE $InitFifo(CLOSE); InitFifo(OPEN);$
-            % \STATE $s \leftarrow$ . . . ; // choice of the initial vertex:
-            % \STATE $ColorGr(G, s, white);$
-            % \STATE $AddFifo(OPEN, s);$
-            % \WHILE{not $IsEmptyFifo(OPEN)$}
-            %     \STATE $cv \leftarrow HeadFifo(OPEN); RemoveFifo(OPEN);$
-            %     \STATE $AddFifo(CLOSE, cv);$
-            %     \STATE $OpenNeighborsGr(G, cv);$
-            %     \WHILE{not $EndListNeighborsGr(G, cv)$}
-            %         \STATE $ReadNeighborsGr(G, cv, neighb);$
-            %         \IF{$WhichColorGr(G, neighb) = grey$}
-            %             \STATE $ColorGr(G, neighb, white);$
-            %             \STATE $AddFifo(OPEN, neighb);$
-            %         \ENDIF
-            %     \ENDWHILE
-            % \ENDWHILE
-            % \STATE $write(CLOSE);$
-            % \STATE $END$
         \end{algorithmic}
     \end{algorithm}
         
@@ -414,29 +376,46 @@ $a \prec b, a \prec c, b \prec d, c \prec b, c \prec d, c \prec e, c \prec f, e 
 \begin{latin}
     
     \begin{algorithm}
-        \caption{}\label{your_label}
+        % \caption{}\label{your_label}
         \begin{algorithmic}
-            \STATE //coloring all the vertices in grey:
-            \FOR{$w \in N$}
-                \STATE $ColorGr(G, w, grey)$
-            \ENDFOR
-            \STATE $InitFifo(CLOSE); InitFifo(OPEN);$
-            \STATE $s \leftarrow$ . . . ; // choice of the initial vertex:
-            \STATE $ColorGr(G, s, white);$
-            \STATE $AddFifo(OPEN, s);$
-            \WHILE{not $IsEmptyFifo(OPEN)$}
-                \STATE $cv \leftarrow HeadFifo(OPEN); RemoveFifo(OPEN);$
-                \STATE $AddFifo(CLOSE, cv);$
-                \STATE $OpenNeighborsGr(G, cv);$
-                \WHILE{not $EndListNeighborsGr(G, cv)$}
-                    \STATE $ReadNeighborsGr(G, cv, neighb);$
-                    \IF{$WhichColorGr(G, neighb) = grey$}
-                        \STATE $ColorGr(G, neighb, white);$
-                        \STATE $AddFifo(OPEN, neighb);$
-                    \ENDIF
-                \ENDWHILE
+            \STATE $constants:$
+            \STATE EInit ⊂ N1 and EInit = {. . .} and n = card(EInit)
+
+            \STATE $variables:$
+            \STATE E ⊂ N1 and V ∈ E × E and G = (E, V) and IsDAG(G) and
+            \STATE S $\in$ FIFO(EInit)
+            \STATE $begin$
+
+            \STATE $E \leftarrow EInit; V \leftarrow {. . .};$
+            \STATE $InitFifo(S);$
+
+            \WHILE{$|S| ̸= n$}
+                \STATE let s such that
+                \STATE $s \in E and d - G (s) = 0$
+
             \ENDWHILE
-            \STATE $write(CLOSE);$
+
+            \FOR{$v \in L$}
+                \IF{$v.di = 0$}
+                    \STATE $L \leftarrow L - {v};$
+                    \STATE $AddFifo(F, v)$
+                \ENDIF
+            \ENDFOR
+            
+            \STATE $InitFifo(S);$
+            \WHILE{$|S| ̸= n$}
+                \STATE $t \leftarrow HeadFifo(F);$
+                \STATE $RemoveFifo(F);$
+                \STATE $AddFifo(S, t.id);$
+                \FOR{$w \in t.suc$}
+                    \STATE $w.di \leftarrow w.di - 1;$
+                    \IF{$w.di = 0$}
+                        \STATE $t.suc \leftarrow t.suc - {w};$
+                        \STATE $AddFifo(F, w)$
+                    \ENDIF
+                \ENDFOR
+            \ENDWHILE
+            \STATE $write(F)$
             \STATE $END$
         \end{algorithmic}
     \end{algorithm}
@@ -462,7 +441,7 @@ $a \prec b, a \prec c, b \prec d, c \prec b, c \prec d, c \prec e, c \prec f, e 
 صف خروجی S خالی است؛ مجموعه L از هر نمایش گراف ایجاد می شود و نقاط ورودی در صف ورودی F قرار می گیرند. تمام رئوس های دیگر در L باقی می مانند.
 
 پایان \LTRfootnote{Termination}
-در هر مرحله از پیشرفت، یک راس به صف S منتقل می شود: $n − |S|$ یک عبارت خاتمه پذیر قابل قبول است.
+در هر مرحله از پیشرفت، یک راس به صف S منتقل می شود: $n - |S|$ یک عبارت خاتمه پذیر قابل قبول است.
 
 \subsubsection*{الگوریتم}
 
@@ -472,29 +451,39 @@ $a \prec b, a \prec c, b \prec d, c \prec b, c \prec d, c \prec e, c \prec f, e 
 \begin{latin}
     
     \begin{algorithm}
-        \caption{}\label{your_label}
+        % \caption{}\label{your_label}
         \begin{algorithmic}
-            \STATE //coloring all the vertices in grey:
-            \FOR{$w \in N$}
-                \STATE $ColorGr(G, w, grey)$
+            \STATE $constants:$
+            \STATE LL = {(id, di, suc) | id $\in$ E and di $\in$ N1 and suc $\subseteq$ E} and
+            \STATE E ⊂ N1 and E = {. . .} and V $\in$ E $\times$ E and V = {. . .} and
+            \STATE $G = (E, V)$ and IsDAG(G) and n = card(E)
+
+            \STATE $variables:$
+            \STATE S $\in$ FIFO(E) and F $\in$ FIFO(LL) and L $\subseteq$ LL and t $\in$ L
+            \STATE $begin$
+
+            \STATE $Construct(L, G); InitFifo(F);$
+            \FOR{$v \in L$}
+                \IF{$v.di = 0$}
+                    \STATE $L \leftarrow L - {v};$
+                    \STATE $AddFifo(F, v)$
+                \ENDIF
             \ENDFOR
-            \STATE $InitFifo(CLOSE); InitFifo(OPEN);$
-            \STATE $s \leftarrow$ . . . ; // choice of the initial vertex:
-            \STATE $ColorGr(G, s, white);$
-            \STATE $AddFifo(OPEN, s);$
-            \WHILE{not $IsEmptyFifo(OPEN)$}
-                \STATE $cv \leftarrow HeadFifo(OPEN); RemoveFifo(OPEN);$
-                \STATE $AddFifo(CLOSE, cv);$
-                \STATE $OpenNeighborsGr(G, cv);$
-                \WHILE{not $EndListNeighborsGr(G, cv)$}
-                    \STATE $ReadNeighborsGr(G, cv, neighb);$
-                    \IF{$WhichColorGr(G, neighb) = grey$}
-                        \STATE $ColorGr(G, neighb, white);$
-                        \STATE $AddFifo(OPEN, neighb);$
+            
+            \STATE $InitFifo(S);$
+            \WHILE{$|S| ̸= n$}
+                \STATE $t \leftarrow HeadFifo(F);$
+                \STATE $RemoveFifo(F);$
+                \STATE $AddFifo(S, t.id);$
+                \FOR{$w \in t.suc$}
+                    \STATE $w.di \leftarrow w.di - 1;$
+                    \IF{$w.di = 0$}
+                        \STATE $t.suc \leftarrow t.suc - {w};$
+                        \STATE $AddFifo(F, w)$
                     \ENDIF
-                \ENDWHILE
+                \ENDFOR
             \ENDWHILE
-            \STATE $write(CLOSE);$
+            \STATE $write(F)$
             \STATE $END$
         \end{algorithmic}
     \end{algorithm}
