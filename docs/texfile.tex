@@ -466,7 +466,54 @@ $a \prec b, a \prec c, b \prec d, c \prec b, c \prec d, c \prec e, c \prec f, e 
 پایان (Termination)
 در هر مرحله از پیشرفت، یک راس به صف S منتقل می شود: n − |S| یک عبارت خاتمه پذیر قابل قبول است.
 
+\subsubsection*{الگوریتم}
 
+بعد از این، هر عنصر از L از سه جزء تشکیل شده است: id معرف شناسه راس، di درجه ورودی آن و suc لیست جانشینان آن است. رویه Construct به شما امکان می دهد تا نمایشی مناسب از گراف اولیه G را در ساختار داده L بدست آورید. صف ورودی F را می توان به عنوان یک صف FIFO پیاده سازی کرد زیرا عناصر آن اولویت یکسانی دارند.
+
+
+\begin{latin}
+    
+    \begin{algorithm}
+        \caption{}\label{your_label}
+        \begin{algorithmic}
+            \STATE //coloring all the vertices in grey:
+            \FOR{$w \in N$}
+                \STATE $ColorGr(G, w, grey)$
+            \ENDFOR
+            \STATE $InitFifo(CLOSE); InitFifo(OPEN);$
+            \STATE $s \leftarrow$ . . . ; // choice of the initial vertex:
+            \STATE $ColorGr(G, s, white);$
+            \STATE $AddFifo(OPEN, s);$
+            \WHILE{not $IsEmptyFifo(OPEN)$}
+                \STATE $cv \leftarrow HeadFifo(OPEN); RemoveFifo(OPEN);$
+                \STATE $AddFifo(CLOSE, cv);$
+                \STATE $OpenNeighborsGr(G, cv);$
+                \WHILE{not $EndListNeighborsGr(G, cv)$}
+                    \STATE $ReadNeighborsGr(G, cv, neighb);$
+                    \IF{$WhichColorGr(G, neighb) = grey$}
+                        \STATE $ColorGr(G, neighb, white);$
+                        \STATE $AddFifo(OPEN, neighb);$
+                    \ENDIF
+                \ENDWHILE
+            \ENDWHILE
+            \STATE $write(CLOSE);$
+            \STATE $END$
+        \end{algorithmic}
+    \end{algorithm}
+        
+\end{latin}
+
+آخرین اصلاح مبتنی بر اشاره گرها و ساختارهای پویا نمایش زیر را برای اسکما (ب) پاسخ به سوال ۳ ارائه می دهد:
+
+\begin{center}
+    \includegraphics{./fig7.10.pdf}
+
+    % \imgcaption{جدول ۱۲.۱۲: یک آرایه پیشوند-پسوندی از تمام پورین های ۴ حرف}
+\end{center}
+
+\subsubsection*{پیچیدگی}
+
+قابل فرض است که رویه Construct در $Θ(n + card(V))$ باشد. این در صورتی اتفاق می افتد که نمایش اولیه بر اساس لیست جانشینان باشد (نگاه کنید به شکل ۱.۳، صفحه ۲۳). تحت این شرایط، به نظر می رسد که برای بقیه الگوریتم، هر راس و هر یال یک بار در نظر گرفته شوند و عملیات روی صف ها در $Θ(۱)$ باشند. در نتیجه، پیچیدگی این راه‌حل در $Θ(n + card(V))$ است. در بدترین حالت، این راه‌حل از نظر مجانبی بهتر از راه‌حل قبلی نیست، زیرا همانطور که در سوال ۲ ذکر شد، یک DAG می‌تواند به ترتیب $n^2$ یال داشته باشد. از طرف دیگر، در مورد گراف‌های غیر متراکم $(card(V) ≪ n^2)$، این راه‌حل بهتر است زیرا در $O(n + card(V))$ قرار دارد.
 
 
 
