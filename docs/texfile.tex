@@ -392,31 +392,17 @@ $a \prec b, a \prec c, b \prec d, c \prec b, c \prec d, c \prec e, c \prec f, e 
             \WHILE{$|S| ̸= n$}
                 \STATE let s such that
                 \STATE $s \in E and d - G (s) = 0$
+                \STATE $begin$
+                \STATE $AddFifo(S, s);$
+                \STATE $E \leftarrow E - {s};$
+                \STATE $G \leftarrow Induced(G, E)$
+                \STATE $END$
 
             \ENDWHILE
-
-            \FOR{$v \in L$}
-                \IF{$v.di = 0$}
-                    \STATE $L \leftarrow L - {v};$
-                    \STATE $AddFifo(F, v)$
-                \ENDIF
-            \ENDFOR
-            
-            \STATE $InitFifo(S);$
-            \WHILE{$|S| ̸= n$}
-                \STATE $t \leftarrow HeadFifo(F);$
-                \STATE $RemoveFifo(F);$
-                \STATE $AddFifo(S, t.id);$
-                \FOR{$w \in t.suc$}
-                    \STATE $w.di \leftarrow w.di - 1;$
-                    \IF{$w.di = 0$}
-                        \STATE $t.suc \leftarrow t.suc - {w};$
-                        \STATE $AddFifo(F, w)$
-                    \ENDIF
-                \ENDFOR
-            \ENDWHILE
-            \STATE $write(F)$
+            \STATE $write(S)$
             \STATE $END$
+
+        
         \end{algorithmic}
     \end{algorithm}
         
